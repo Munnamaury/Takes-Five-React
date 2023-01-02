@@ -1,35 +1,27 @@
-const backButton = document.getElementById("back-button");
-const nextButton = document.getElementById("next-button");
-let currentPage = 1;
+// javascript code goes here
+const backButton = document.getElementById('back-button');
+const nextButton = document.getElementById('next-button');
+const numberDisplay = document.getElementById('number-display');
 
-nextButton.addEventListener("click", () => {
-  currentPage++;
+let page = 1;
 
-  if (currentPage > 1) {
-    backButton.disabled = false;
-  }
-
-  updateNumbers(currentPage);
+nextButton.addEventListener('click', () => {
+  page++;
+  backButton.disabled = false;
+  updateNumbers();
 });
 
-backButton.addEventListener("click", () => {
-
-  if (currentPage === 1) {
+backButton.addEventListener('click', () => {
+  page--;
+  if (page === 1) {
     backButton.disabled = true;
   }
-  updateNumbers(currentPage);
+  updateNumbers();
 });
 
-function updateNumbers(page) {
-  const numberDisplay = document.getElementById("number-display");
-  numberDisplay.innerHTML = "";
-
-  // Calculate the range of numbers to display based on the current page
-  const start = (page - 1) * 5 + 1;
-  const end = start + 4;
-  for (let i = start; i <= end; i++) {
-    const div = document.createElement("div");
-    div.textContent = i;
-    numberDisplay.appendChild(div);
+function updateNumbers() {
+  numberDisplay.innerHTML = '';
+  for (let i = (page - 1) * 5 + 1; i <= page * 5; i++) {
+    numberDisplay.innerHTML += `<div class="number">${i}</div>`;
   }
 }
